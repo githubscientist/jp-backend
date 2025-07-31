@@ -30,3 +30,45 @@ A comprehensive job application backend built with Node.js, Express, and MongoDB
 - Application Management
 - Job Listing Management
 - System Monitoring and Analytics
+
+Checklist:
+
+[x] npm initialization
+[x] git initialization
+[x] Database Setup -- MongoDB Cloud --Done Server.js --Done
+[ ] Server Setup --In Progress
+[ ] User Authentication
+[ ] Role Based Access Control
+
+### Setup Steps
+
+1. Npm Initialization
+
+   ```bash
+   npm init -y
+   ```
+
+2. Git Initialization & Connect to the Remote
+
+   ```bash
+   git init
+   ```
+
+3. Setup MongoDB Cluster Cloud
+
+   - Create a MongoDB Atlas account
+   - Create a new cluster
+   - Configure network access and database users
+   - Obtain the connection string
+
+4. Setup Mongoose
+
+   ```bash
+   npm install mongoose
+   ```
+
+5. Setup dotenv for Environment Variables
+
+   ```bash
+   npm install dotenv
+   ```
