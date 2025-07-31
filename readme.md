@@ -36,8 +36,8 @@ Checklist:
 [x] npm initialization
 [x] git initialization
 [x] Database Setup -- MongoDB Cloud --Done Server.js --Done
-[ ] Server Setup --In Progress
-[ ] User Authentication
+[x] Server Setup --In Progress
+[x] User Authentication
 [ ] Role Based Access Control
 
 ### Setup Steps
