@@ -1,0 +1,29 @@
+{
+  "name": "jp-backend",
+  "version": "1.0.0",
+  "description": "Job Portal Backend that allows users to search for jobs, apply for them, manage their profiles, and much more.",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/githubscientist/jp-backend.git"
+  },
+  "keywords": [
+    "jobs",
+    "applications",
+    "interviews",
+    "openings",
+    "mern",
+    "nodejs",
+    "expressjs",
+    "mongodb"
+  ],
+  "author": "Sathish Gnanaprakasam",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/githubscientist/jp-backend/issues"
+  },
+  "homepage": "https://github.com/githubscientist/jp-backend#readme"
+}
