@@ -72,3 +72,9 @@ Checklist:
    ```bash
    npm install dotenv
    ```
+
+6. Server Setup with Express
+
+   ```bash
+   npm install express
+   ```
