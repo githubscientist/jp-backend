@@ -2,6 +2,8 @@
 const express = require('express');
 const { register, login } = require('../controllers/auth');
 const { body } = require('express-validator');
+const { getMe } = require('../controllers/auth');
+const { protect } = require('../middleware/auth');
 
 // create a router object
 const router = express.Router();
@@ -22,6 +24,7 @@ const loginValidation = [
 
 router.post('/register', registrationValidation, register);
 router.post('/login', loginValidation, login);
+router.get('/me', protect, getMe);
 
 // export the router
 module.exports = router;
