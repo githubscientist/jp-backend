@@ -1,5 +1,6 @@
 const { validationResult } = require("express-validator");
 const User = require('../models/User');
+const { sendTokenResponse } = require('../utils/auth');
 
 const register = async (req, res) => {
     try {
@@ -33,11 +34,8 @@ const register = async (req, res) => {
             password
         });
 
-        // send a success response
-        res.status(201).json({
-            success: true,
-            message: 'User registered successfully',
-        });
+        // send token response
+        sendTokenResponse(user, 201, res);
     } catch (error) {
         console.error('Register error:', error.message);
         res.status(500).json({
@@ -47,6 +45,67 @@ const register = async (req, res) => {
     }
 }
 
+const login = async (req, res) => {
+    try {
+        // check for validation errors
+        const errors = validationResult(req);
+
+        if (!errors.isEmpty()) {
+            return res.status(400).json({
+                success: false,
+                message: 'Validation failed',
+                errors: errors.array()
+            });
+        }
+
+        // get the email and password from the request body
+        const { email, password } = req.body;
+
+        // check if the user exists
+        const user = await User.findOne({ email }).select('+password');
+
+        if (!user) {
+            return res.status(401).json({
+                success: false,
+                message: 'Invalid credentials'
+            });
+        }
+
+        // check if the user is active
+        if (!user.isActive) {
+            return res.status(403).json({
+                success: false,
+                message: 'User account is not active. Please contact support.'
+            });
+        }
+
+        // check if the password matches
+        const isMatch = await user.matchPassword(password);
+
+        if (!isMatch) {
+            return res.status(401).json({
+                success: false,
+                message: 'Invalid credentials'
+            });
+        }
+
+        // update the last login
+        user.lastLogin = new Date();
+        await user.save();
+
+        // send token response
+        sendTokenResponse(user, 200, res);
+    } catch (error) {
+        console.error('Login error:', error.message);
+
+        res.status(500).json({
+            success: false,
+            message: 'Server error during login'
+        });
+    }
+}
+
 module.exports = {
     register,
+    login
 }

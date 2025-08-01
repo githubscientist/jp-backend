@@ -5,6 +5,7 @@ const cookieParser = require('cookie-parser');
 
 // import router
 const authRoutes = require('./routes/auth');
+const errorHandler = require('./middleware/errorHandler');
 
 // create an Express application
 const app = express();
@@ -31,7 +32,7 @@ app.get('/api/health', (req, res) => {
 });
 
 // error handling middleware
-// to be implemented later
+app.use(errorHandler);
 
 // handle 404 errors
 app.use((req, res, next) => {
