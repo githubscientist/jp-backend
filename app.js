@@ -5,6 +5,7 @@ const cookieParser = require('cookie-parser');
 
 // import router
 const authRoutes = require('./routes/auth');
+const jobRoutes = require('./routes/jobs');
 const errorHandler = require('./middleware/errorHandler');
 
 // create an Express application
@@ -21,6 +22,7 @@ app.use(cookieParser());
 
 // Routes
 app.use('/api/auth', authRoutes);
+app.use('/api/jobs', jobRoutes);
 
 // health check route
 app.get('/api/health', (req, res) => {
