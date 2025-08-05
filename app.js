@@ -2,14 +2,27 @@
 const express = require('express');
 
 const cookieParser = require('cookie-parser');
+const cors = require('cors');
 
 // import router
 const authRoutes = require('./routes/auth');
 const jobRoutes = require('./routes/jobs');
+const userRoutes = require('./routes/users');
+const adminRoutes = require('./routes/admin');
+const applicationRoutes = require('./routes/applications');
 const errorHandler = require('./middleware/errorHandler');
+const { FRONTEND_URL } = require('./utils/config');
+const morgan = require('morgan');
 
 // create an Express application
 const app = express();
+
+app.use(cors({
+    origin: FRONTEND_URL || 'http://localhost:5174',
+    credentials: true, // allow cookies to be sent with requests
+}));
+
+app.use(morgan('dev')); // logging middleware
 
 // middlware to parse JSON bodies
 app.use(express.json({ limit: '10mb' }));
@@ -23,6 +36,9 @@ app.use(cookieParser());
 // Routes
 app.use('/api/auth', authRoutes);
 app.use('/api/jobs', jobRoutes);
+app.use('/api/applications', applicationRoutes);
+app.use('/api/users', userRoutes);
+app.use('/api/admin', adminRoutes);
 
 // health check route
 app.get('/api/health', (req, res) => {
